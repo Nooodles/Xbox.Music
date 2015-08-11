@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Runtime.Serialization;
 
 namespace Xbox.Music
@@ -38,6 +39,12 @@ namespace Xbox.Music
         /// </summary>
         [DataMember]
         public HttpResponseMessage Response { get; set; }
+
+        /// <summary>
+        /// Exception that has been thrown
+        /// </summary>
+        [DataMember]
+        public Exception Exception { get; set; }
 
     }
 }

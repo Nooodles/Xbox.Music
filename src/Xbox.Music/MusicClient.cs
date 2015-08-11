@@ -41,7 +41,7 @@ namespace Xbox.Music
         /// Responses will be filtered to provide only those that match the user's country/region.
         /// </summary>
         public string Country { get; set; }
-        
+
         /// <summary>
         /// Required. A valid developer authentication Access Token obtained from Azure Data Market, 
         /// used to identify the third-party application using the Xbox Music RESTful API.
@@ -163,7 +163,7 @@ namespace Xbox.Music
             if (string.IsNullOrWhiteSpace(id))
                 throw new ArgumentNullException("id", "You must specify an ID");
 
-            return await Get(new List<string> {id}, options);
+            return await Get(new List<string> { id }, options);
         }
 
         /// <summary>
@@ -343,13 +343,20 @@ namespace Xbox.Music
                 return result.Content;
             }
 
+            string errorMessage = null;
+            if (result.HttpResponseMessage != null)
+                errorMessage += string.Format("HttpResponseMessage: {0}\n", result.HttpResponseMessage.ReasonPhrase);
+            if (result.Exception != null)
+                errorMessage += string.Format("Exception: {0}", result.Exception.Message);
+
             return new ContentResponse
             {
                 Error = new Error
                 {
                     ErrorCode = result.HttpResponseMessage != null ? result.HttpResponseMessage.StatusCode.ToString() : "",
-                    Message = result.HttpResponseMessage != null ? result.HttpResponseMessage.ReasonPhrase : result.Exception.Message,
+                    Message = errorMessage,
                     Response = result.HttpResponseMessage,
+                    Exception = result.Exception
                 }
             };
 
@@ -379,7 +386,7 @@ namespace Xbox.Music
             {
                 request.AddQueryString("country", Country);
             }
-           
+
             return request;
         }
 
