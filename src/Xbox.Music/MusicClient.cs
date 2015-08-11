@@ -284,7 +284,7 @@ namespace Xbox.Music
             var request = new RestRequest("v2/OAuth2-13", HttpMethod.Post)
             {
                 ContentType = ContentTypes.FormUrlEncoded,
-                ReturnRawString = true,
+                //ReturnRawString = true,
             };
             request.AddParameter("client_id", ClientId);
             request.AddParameter("client_secret", ClientSecret);
@@ -348,7 +348,7 @@ namespace Xbox.Music
                 Error = new Error
                 {
                     ErrorCode = result.HttpResponseMessage != null ? result.HttpResponseMessage.StatusCode.ToString() : "",
-                    Message = result.HttpResponseMessage != null ? result.HttpResponseMessage.ReasonPhrase : result.SerializationException.Message,
+                    Message = result.HttpResponseMessage != null ? result.HttpResponseMessage.ReasonPhrase : result.Exception.Message,
                     Response = result.HttpResponseMessage,
                 }
             };

@@ -14,7 +14,7 @@ namespace Xbox.Music.Tests
     {
 
         private static string _find1ContinuationToken = "";
-        private static string _get1ContinuationToken = "";
+        //private static string _get1ContinuationToken = "";
 
         [TestMethod]
         public async Task FindTest1()
@@ -83,6 +83,16 @@ namespace Xbox.Music.Tests
             Assert.IsNotNull(result.Artists);
             //Assert.IsNotNull(result.Tracks);
             //Assert.IsNotNull(result.Albums);
+        }
+
+        [TestMethod]
+        public async Task GetArtistDetails()
+        {
+            var client = new MusicClient("XboxMusicClientTests", "ThisWillBeChangedOften");
+            var result = await client.Get("music.C61C0000-0200-11DB-89CA-0019B92A3933", new LookupOptions(true));
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Error);
+            Assert.IsNotNull(result.Artists);
         }
 
         [TestMethod]

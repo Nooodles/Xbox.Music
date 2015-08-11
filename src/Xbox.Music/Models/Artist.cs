@@ -46,7 +46,7 @@ namespace Xbox.Music
         /// a few fields, including the ID that should be used in a lookup request in order to have the full album properties.
         /// </remarks>
         [DataMember]
-        public List<Album> Albums { get; set; }
+        public PaginatedList<Album> Albums { get; set; }
 
         /// <summary>
         /// A paginated list of the artist's top tracks, ordered by decreasing order of popularity. 
@@ -56,7 +56,7 @@ namespace Xbox.Music
         /// only a few fields, including the ID that should be used in a lookup request in order to have the full track properties.
         /// </remarks>
         [DataMember]
-        public List<Track> TopTracks { get; set; }
+        public PaginatedList<Track> TopTracks { get; set; }
 
         #endregion
 
